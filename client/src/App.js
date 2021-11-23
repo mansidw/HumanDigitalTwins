@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import "./assets/css/App.css"
+import {EmailProvider} from "./contexts/EmailContext"
+import UserProvider from "./contexts/UserProvider";
+import Landing from "./Landing";
+import Login from "./components/sign/Login";
+import Logout from "./components/sign/Logout";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          mansi is a good girl
-        </a>
-      </header>
-    </div>
+    <EmailProvider>
+      <UserProvider>
+        <Router>
+          <div className="App">
+            <Routes>
+              <Route exact path="/" element={<Landing/>}></Route>
+              <Route exact path="/login" element={<Login/>}></Route>
+              <Route exact path="/logout" element={<Logout/>}></Route>
+            </Routes>
+          </div>
+        </Router>
+      </UserProvider>
+    </EmailProvider>
+    
   );
 }
 
