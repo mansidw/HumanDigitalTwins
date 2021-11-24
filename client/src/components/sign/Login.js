@@ -1,7 +1,7 @@
-import React, { useEffect, useContext, useState, useRef } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import '../../assets/css/login.css'
 import '../../assets/css/tailwind.css'
-import { useNavigate } from "react-router-dom"
+import { Link,useNavigate } from "react-router-dom"
 import { signInWithGoogle } from '../../services/firebase';
 import { UserContext } from '../../contexts/UserProvider';
 import Landing from '../../Landing';
@@ -57,7 +57,7 @@ const Login = () => {
   
   const FormInput = () => (
     <>
-    <div class="row">
+    <div className="row">
       <label>Email</label>
       <input ref={emailRef} type="email" placeholder="Enter your Email" />
     </div>
@@ -94,12 +94,15 @@ const Login = () => {
   
   return (
     !user && !currentUser?
-    <div id="loginform">
+    <>
+    <div id="loginform" style={{marginBottom:"10px"}}>
       {error && <Alert severity="error">{error}</Alert>}
       <FormHeader title="Login" />
       <Form />
       <OtherMethods/>
-    </div>:<Landing/>
+    </div>
+    Make an account? <Link to="/signup">Sign Up</Link>
+    </>:<Landing/>
   )
 }
 
