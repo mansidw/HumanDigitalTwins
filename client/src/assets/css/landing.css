@@ -1,0 +1,8 @@
+hr.rounded {
+  border: 0;
+  margin-left: 450px;
+  margin-right: 450px;
+  border-top: 7px solid black;
+  border-radius: 5px;
+}
+
