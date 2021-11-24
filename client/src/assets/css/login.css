@@ -12,7 +12,7 @@ html{
 #loginform{
   max-width: 500px;
   min-width: 300px;
-  max-height: 700px;
+  max-height: auto;
   width: 30%;
   height: 60%;
   margin: 100px auto;

@@ -7,7 +7,9 @@ import Landing from "./Landing";
 import Login from "./components/sign/Login";
 import Signup from "./components/sign/Signup";
 import PrivateRoute from "./PrivateRoute"
-import Priv from "./Priv"
+// import Priv from "./Priv"
+import AddDetails from "./components/sign/AddDetails";
+import MyProfile from "./components/sign/MyProfile";
 
 function App() {
   return (
@@ -18,8 +20,11 @@ function App() {
             <div className="App">
               <Routes>
                 <Route exact path="/" element={<Landing/>}></Route>
-                <Route exact path='/priv' element={<PrivateRoute/>}>
-                  <Route exact path='/priv' element={<Priv/>}/>
+                <Route exact path='/addDetails' element={<PrivateRoute/>}>
+                  <Route exact path='/addDetails' element={<AddDetails/>}/>
+                </Route>
+                <Route exact path='/myprofile' element={<PrivateRoute/>}>
+                  <Route exact path='/myprofile' element={<MyProfile/>}/>
                 </Route>                
                 <Route exact path="/login" element={<Login/>}></Route>
                 <Route exact path="/signup" element={<Signup/>}></Route>

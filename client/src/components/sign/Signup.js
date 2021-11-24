@@ -1,10 +1,12 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef,useContext } from 'react';
 import '../../assets/css/login.css'
 import '../../assets/css/tailwind.css'
 import { Link,useNavigate } from "react-router-dom"
 import Alert from '@mui/material/Alert';
+import { UserContext } from '../../contexts/UserProvider';
 import { useAuth } from '../../contexts/EmailContext';
 import { signInWithGoogle } from '../../services/firebase';
+import AddDetails from './AddDetails';
 
 const Signup = () => {
     const navigate = useNavigate()
@@ -14,6 +16,7 @@ const Signup = () => {
     const { signup } = useAuth()
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
+    const user = useContext(UserContext)
 
     async function handleSubmit(a) {
         if(a==0){
@@ -24,16 +27,16 @@ const Signup = () => {
                 setError("")
                 setLoading(true)
                 await signup(emailRef.current.value,passwordRef.current.value)
-                navigate("/")
+                navigate("/addDetails")//change
             } catch {
                 setError("Failed to sign up! Try Again :(")
             }
         }
-        else{
-            setLoading(true)
-            signInWithGoogle();
-            navigate("/")
-        }
+        // else{
+        //     setLoading(true)
+        //     signInWithGoogle();
+        //     navigate("/addDetails")//change
+        // }
       setLoading(false)
     }
 
@@ -87,7 +90,7 @@ const Signup = () => {
     const Google = props => (
         <button
           className="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
-          type="button" onClick={()=>handleSubmit(1)}
+          type="button" onClick={signInWithGoogle}
         >
           <img
           alt="..."
@@ -99,6 +102,7 @@ const Signup = () => {
     
   
   return (
+    !user?
       <>
     <div id="loginform" style={{marginBottom:"10px"}}>
       {error && <Alert severity="error">{error}</Alert>}
@@ -107,7 +111,7 @@ const Signup = () => {
       <OtherMethods/>
     </div>
     Already have an account? <Link to="/login">Log In</Link>
-    </>)
+    </>:<AddDetails/>)
   
 }
 
