@@ -25,9 +25,6 @@ const MyProfile = () => {
     const user = useContext(UserContext)
 
     useEffect(()=>{
-        // if(currentUser){console.log("useffect se hi set hai",currentUser,user)}
-        // if(user){var rnuser=user['uid']}
-        // else{var rnuser=currentUser.uid}
         firestore.collection("users").doc(user['uid'])
         .get()
         .then((doc) => {
@@ -44,7 +41,7 @@ const MyProfile = () => {
     
     const[navOpen,setNavOpen] = useState(false)
     const[navIsAnimating,setNavIsAnimating] = useState(false)
-    const loggedInUser = {'GET JOBS':'/','MY HEALTH':'/','MY PRODUCTIVITY':'/','MY PROFILE':'/myprofile','HOW WE WORK?':'/'}
+    const loggedInUser = {'GET JOBS':'/','MY HEALTH':'/health','MY PRODUCTIVITY':'/','MY PROFILE':'/myprofile','HOW WE WORK?':'/','HOME':'/'}
     const notloggedInUser = {'LOGIN':'/login','JOIN':'/signup','HOW WE WORK?':'/'}
  
     const toggleNav = (event) => {
@@ -185,33 +182,6 @@ const MyProfile = () => {
       <input ref={passwordConfirmRef} type="password" placeholder="Leave blank to keep the same" />
     </div>
   </>
-//   :
-//   <>
-//     <div className="row">
-//         <label>Name</label>
-//         <input ref={nameRef} type="text" defaultValue={message.name} />
-//     </div>
-
-//     <div class="row">
-//         <label>Email</label>
-//         <input type="email" defaultValue={user['email']} />
-//     </div>
-    
-//     <div class="row">
-//         <label>Age</label>
-//         <input ref={ageRef} type="number" defaultValue={message.age} />
-//     </div>
-
-//     <div class="row">
-//         <label>Height</label>
-//         <input ref={heightRef} type="number" defaultValue={message.height} />
-//     </div>
-
-//     <div class="row">
-//         <label>Weight</label>
-//         <input ref={weightRef} type="number" defaultValue={message.weight} />
-//     </div>
-//     </>)
 :<></>
   );
   
