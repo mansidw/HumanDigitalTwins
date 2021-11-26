@@ -2,7 +2,6 @@ import React, { useContext, useState, useRef } from 'react';
 import '../../assets/css/login.css'
 import '../../assets/css/tailwind.css'
 import { useNavigate } from "react-router-dom"
-import { UserContext } from '../../contexts/UserProvider';
 import Alert from '@mui/material/Alert';
 import { firestore } from '../../services/firebase';
 import { useAuth } from '../../contexts/EmailContext';
@@ -19,32 +18,28 @@ const AddDetails = () => {
     const { currentUser } = useAuth()
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
-    const user = useContext(UserContext)
+    const [isCheckedf, setIsCheckedf] = useState(false);
+    const [isCheckedm, setIsCheckedm] = useState(false);
+
+    const handleOnChangeF = (e) => {
+      e.preventDefault()
+      setIsCheckedf(!isCheckedf);
+    };
     
+    const handleOnChangeM = (e) => {
+      e.preventDefault()
+      setIsCheckedm(!isCheckedm);
+    };
+
     function handleSubmit(e) {
         e.preventDefault()
         var rnuser;
-        var rngend;
+        var rngend=""
+        if(isCheckedf){rngend="F"}
+        else{rngend='M'}
         setError("")
         setLoading(true)
-        if(user){
-            console.log("mai google")
-            rnuser=user['uid']
-            console.log(rnuser)
-        }else{
-            console.log("mai normal")
-            rnuser=currentUser.uid
-            console.log(rnuser)
-        }
-
-        if(maleRef.current.value=='on'){
-            console.log("mai aadmi")
-            rngend="M"
-        }
-        else{
-            console.log("mai aurat")
-            rngend="F"
-        }
+        rnuser=currentUser.uid
         firestore.collection("users").doc(rnuser).set({
             name:nameRef.current.value,
             age:ageRef.current.value,
@@ -100,11 +95,13 @@ const AddDetails = () => {
       <input ref={weightRef} type="number" placeholder="Enter your Weight in Kgs" />
     </div>
 
-    <div class="row">
+    <div class="rowdummy">
       <label>Gender</label>
-      <input ref={femaleRef} type="radio" id="female" name="gender" value="Female"/>
+      <input ref={femaleRef} type="radio" id="female" name="gender" value="Female" checked={isCheckedf}
+          onClick={handleOnChangeF}/>
       <label for="female">Female</label><br/>
-      <input ref={maleRef} type="radio" id="male" name="gender" value="Male"/>
+      <input ref={maleRef} type="radio" id="male" name="gender" value="Male" checked={isCheckedm}
+          onClick={handleOnChangeM}/>
       <label for="male">Male</label><br/>
     </div>
   </>

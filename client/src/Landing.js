@@ -21,7 +21,7 @@ const Landing = () => {
 
     const[navOpen,setNavOpen] = useState(false)
     const[navIsAnimating,setNavIsAnimating] = useState(false)
-    const loggedInUser = {'GET JOBS':'/','MY HEALTH':'/','MY PRODUCTIVITY':'/','MY PROFILE':'/myprofile','HOW WE WORK?':'/'}
+    const loggedInUser = {'GET JOBS':'/','MY HEALTH':'/health','MY PRODUCTIVITY':'/','MY PROFILE':'/myprofile','HOW WE WORK?':'/'}
     const notloggedInUser = {'LOGIN':'/login','JOIN':'/signup','HOW WE WORK?':'/'}
     
     const toggleNav = (event) => {

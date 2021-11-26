@@ -7,7 +7,7 @@ import Landing from "./Landing";
 import Login from "./components/sign/Login";
 import Signup from "./components/sign/Signup";
 import PrivateRoute from "./PrivateRoute"
-// import Priv from "./Priv"
+import Healthmain from "./components/health/Healthmain";
 import AddDetails from "./components/sign/AddDetails";
 import MyProfile from "./components/sign/MyProfile";
 
@@ -22,6 +22,9 @@ function App() {
                 <Route exact path="/" element={<Landing/>}></Route>
                 <Route exact path='/addDetails' element={<PrivateRoute/>}>
                   <Route exact path='/addDetails' element={<AddDetails/>}/>
+                </Route>
+                <Route exact path='/health' element={<PrivateRoute/>}>
+                  <Route exact path='/health' element={<Healthmain/>}/>
                 </Route>
                 <Route exact path='/myprofile' element={<PrivateRoute/>}>
                   <Route exact path='/myprofile' element={<MyProfile/>}/>
