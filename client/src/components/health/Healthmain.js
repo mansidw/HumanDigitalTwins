@@ -6,32 +6,18 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import back from "../../assets/img/health3.png"
 import MenuItem from '@mui/material/MenuItem';
-import { NavigationMenu, Header } from '../basic/Header'
-
-////////////////////////////////////// for card ///////////////////////////////
-import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
-import Grid from '@mui/material/Grid';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-
-
-
-////////////////////////////////////// for card ///////////////////////////////
+import { NavigationMenu, Header } from '../basic/Header'
+import EatenCard from './EatenCard';
 
 
 const Healthmain = () => {
-    const [currency, setCurrency] = React.useState('EUR');
+    const[arr,setArr] = useState([]);
+    const foodRef = useRef()
+    const quantRef = useRef()
+    const currencyRef = useRef()
 
-    const handleChange = (event) => {
-        setCurrency(event.target.value);
-    };
-
-    ////////////////////////////////////// for Header ///////////////////////////////    
+////////////////////////////////////// for Header ///////////////////////////////    
     
     const[navOpen,setNavOpen] = useState(false)
     const[navIsAnimating,setNavIsAnimating] = useState(false)
@@ -63,9 +49,13 @@ const Healthmain = () => {
 ////////////////////////////////////// for Header ///////////////////////////////    
 const quantity = [
     {
-      value: 'bowl',
-      label: 'bowl',
+      value: 'bar',
+      label: 'bar',
     },
+    {
+        value: 'bowl',
+        label: 'bowl',
+      },
     {
         value: 'cup',
         label: 'cup',
@@ -101,6 +91,20 @@ const quantity = [
     
   ];
 
+const removeFood=(a)=>{
+    console.log(a)
+}
+
+function handleSubmit(event){
+    event.preventDefault();
+    console.log(foodRef.current.value)
+    setArr((oldval)=>
+        [...oldval,{'name':foodRef.current.value,'quant':quantRef.current.value,'scoop':currencyRef.current.value}]
+    )
+}
+
+
+
     return (
         <div className="layout">
             
@@ -131,106 +135,37 @@ const quantity = [
                             
                         </div>
                         <div className="div5">
-                        <Stack direction="row" spacing={2}>
-                            <div><TextField style={{marginTop:'20px',width:'200px'}} id="outlined-basic" label="What?" variant="outlined" /></div>
-                            <div><TextField style={{marginTop:'20px',width:'200px'}} type="number" id="outlined-basic" label="How much?" variant="outlined" /></div>
-
-                            <div><TextField
-                            id="outlined-select-currency"
-                            select
-                            label="Measure"
-                            value={currency}
-                            onChange={handleChange}
-                            style={{marginTop:'20px',width:'100px'}}
-                            >
-                            {quantity.map((option) => (
-                                <MenuItem key={option.value} value={option.value}>
-                                {option.label}
-                                </MenuItem>
-                            ))}
-                            </TextField></div>
-                        
-                        </Stack>
-                        
+                                <form onSubmit={handleSubmit}>
+                                    <Stack direction="row" spacing={2}>
+                                        <div><TextField style={{marginTop:'20px',width:'200px'}} id="outlined-basic" label="What?" variant="outlined" inputRef={foodRef} /></div>
+                                
+                                        <div><TextField style={{marginTop:'20px',width:'200px'}} type="number" id="outlined-basic" label="How much?" variant="outlined" inputRef={quantRef} /></div>
+                                    
+                                        <div>
+                                            <TextField
+                                            id="outlined-select-currency"
+                                            select
+                                            label="Measure"
+                                            inputRef={currencyRef}
+                                            style={{marginTop:'20px',width:'120px'}}
+                                            >
+                                            {quantity.map((option) => (
+                                                <MenuItem key={option.value} value={option.value}>
+                                                {option.label}
+                                                </MenuItem>
+                                            ))}
+                                            </TextField>
+                                        </div>
+                                        <div><Button variant="contained" type="submit" style={{width:'150px',height:'60px',fontFamily:'inherit',fontWeight:'bold',fontSize:'20px',backgroundColor:'darkblue',color:'white',marginTop:'15px'}}>Done</Button></div>
+                                    </Stack>
+                                </form>
                         
                         </div>
                         
                     </div>
-                    <Box sx={{ width: '50%',marginLeft:'350px', marginTop:'30px' }}>
-                    <Grid container rowSpacing={7} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                        <Grid item xs={6}>
-                            <Card sx={{ minWidth: 275 }} style={{background:'linear-gradient(to right, #FFCA03, #009DAE)'}}>
-                            <CardContent>
-                                <Typography variant="h4" component="div" color="white" style={{fontFamily:'inherit'}}>
-                                I have eaten
-                                </Typography>
-                                <Typography style={{fontFamily:'inherit'}} variant="h2" color="white">
-                                adjective
-                                </Typography>
-                                <Typography style={{fontFamily:'inherit'}} variant="h6" color="white">
-                                well happily.
-                                <br />
-                                </Typography>
-                            </CardContent>
-                            <CardActions disableSpacing>
-                                <IconButton aria-label="add to favorites">
-                                    <RemoveCircleOutlineIcon fontSize="large" style={{color:"white"}}/>
-                                </IconButton>
-                            </CardActions>
-                            </Card>
-
-                            
-                        </Grid>
-
-                        <Grid item xs={6}>
-                            <Card sx={{ minWidth: 275 }} style={{background:'linear-gradient(to right, #FFCA03, #009DAE)'}}>
-                            <CardContent>
-                                <Typography variant="h4" component="div" color="white" style={{fontFamily:'inherit'}}>
-                                I have eaten
-                                </Typography>
-                                <Typography style={{fontFamily:'inherit'}} variant="h2" color="white">
-                                adjective
-                                </Typography>
-                                <Typography style={{fontFamily:'inherit'}} variant="h6" color="white">
-                                well happily.
-                                <br />
-                                </Typography>
-                            </CardContent>
-                            <CardActions disableSpacing>
-                                <IconButton aria-label="add to favorites">
-                                    <RemoveCircleOutlineIcon fontSize="large" style={{color:"white"}}/>
-                                </IconButton>
-                            </CardActions>
-                            </Card>
-
-                            
-                        </Grid>
-
-                        <Grid item xs={6}>
-                            <Card sx={{ minWidth: 275 }} style={{background:'linear-gradient(to right, #FFCA03, #009DAE)'}}>
-                            <CardContent>
-                                <Typography variant="h4" component="div" color="white" style={{fontFamily:'inherit'}}>
-                                I have eaten
-                                </Typography>
-                                <Typography style={{fontFamily:'inherit'}} variant="h2" color="white">
-                                adjective
-                                </Typography>
-                                <Typography style={{fontFamily:'inherit'}} variant="h6" color="white">
-                                well happily.
-                                <br />
-                                </Typography>
-                            </CardContent>
-                            <CardActions disableSpacing>
-                                <IconButton aria-label="add to favorites">
-                                    <RemoveCircleOutlineIcon fontSize="large" style={{color:"white"}}/>
-                                </IconButton>
-                            </CardActions>
-                            </Card>
-
-                            
-                        </Grid>
-                    </Grid>
-                    </Box>
+                     
+                        {arr?<EatenCard arr={arr} remove={removeFood}/>:<></>}
+                        
                     <div className="div7">
                         
                     </div>
