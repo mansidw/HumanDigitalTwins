@@ -21,4 +21,5 @@ from django.conf.urls.static import static #add this
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('workstyle/',include('workstyle.urls')),
+    path('health/',include('health.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
