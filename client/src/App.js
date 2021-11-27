@@ -10,6 +10,8 @@ import PrivateRoute from "./PrivateRoute"
 import Healthmain from "./components/health/Healthmain";
 import AddDetails from "./components/sign/AddDetails";
 import MyProfile from "./components/sign/MyProfile";
+import Result from "./components/health/Result";
+import ExerciseMain from "./components/health/ExerciseMain"
 
 function App() {
   return (
@@ -23,8 +25,14 @@ function App() {
                 <Route exact path='/addDetails' element={<PrivateRoute/>}>
                   <Route exact path='/addDetails' element={<AddDetails/>}/>
                 </Route>
-                <Route exact path='/health' element={<PrivateRoute/>}>
-                  <Route exact path='/health' element={<Healthmain/>}/>
+                <Route exact path='/health/foodcalories' element={<PrivateRoute/>}>
+                  <Route exact path='/health/foodcalories' element={<Healthmain/>}/>
+                </Route>
+                <Route exact path='/health/exercisecalories/:id' element={<PrivateRoute/>}>
+                  <Route exact path='/health/exercisecalories/:id' element={<ExerciseMain/>}/>
+                </Route>
+                <Route exact path='/health/result/:id' element={<PrivateRoute/>}>
+                  <Route exact path='/health/result/:id' element={<Result/>}/>
                 </Route>
                 <Route exact path='/myprofile' element={<PrivateRoute/>}>
                   <Route exact path='/myprofile' element={<MyProfile/>}/>
