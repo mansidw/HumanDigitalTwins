@@ -15,7 +15,7 @@ nltk.download('stopwords')
 # Create your views here.
 
 class JobRecommendation(APIView):
-    def get(self,request):
+    def post(self,request):
         resume = request.FILES.get('resume')
         fss = FileSystemStorage()
         file = fss.save(resume.name.strip().replace(' ',''), resume)
