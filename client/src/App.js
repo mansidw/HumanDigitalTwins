@@ -12,6 +12,7 @@ import AddDetails from "./components/sign/AddDetails";
 import MyProfile from "./components/sign/MyProfile";
 import Result from "./components/health/Result";
 import ExerciseMain from "./components/health/ExerciseMain"
+import JobMain from "./components/jobs/JobMain";
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
                 <Route exact path="/" element={<Landing/>}></Route>
                 <Route exact path='/addDetails' element={<PrivateRoute/>}>
                   <Route exact path='/addDetails' element={<AddDetails/>}/>
+                </Route>
+                <Route exact path='/jobs' element={<PrivateRoute/>}>
+                  <Route exact path='/jobs' element={<JobMain/>}/>
                 </Route>
                 <Route exact path='/health/foodcalories' element={<PrivateRoute/>}>
                   <Route exact path='/health/foodcalories' element={<Healthmain/>}/>

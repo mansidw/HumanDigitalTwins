@@ -4,7 +4,7 @@ import {useAuth} from "../../contexts/EmailContext"
 import "../../assets/css/healthmain.css"
 import { UserContext } from '../../contexts/UserProvider';
 import Stack from '@mui/material/Stack';
-import back from "../../assets/img/fail1.png"
+import back from "../../assets/img/fail2.png"
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -31,19 +31,24 @@ useEffect(async ()=>{
     
 },[])
     
-const handleSubmit =async (cal)=>{
+function handleSubmit(cal){
     let met = cal/(timeRef.current.value*weight)
-    alert(weight,met)
-    const metsRef = firestore.collection('mets');
-    const snapshot = await metsRef.where('Value', '<=','3').get();
-    if (snapshot.empty) {
-        console.log('No matching documents.');
-    }  
+    alert(weight)
+    alert(met)
+    
+    // const metsRef = firestore.collection('mets');
+    // const snapshot = await metsRef.where('Value', '<=','3').orderBy('Value').limit(3).get();
+    // if (snapshot.empty) {
+    //     console.log('No matching documents.');
+    // }  
 
-    snapshot.forEach(doc => {
-        console.log(doc.id, '=>', doc.data());
-        setArr((old)=>[...old,{'name':doc.data()['Specific Motion'],'id':doc.id}])
-    });
+    // snapshot.forEach(doc => {
+    //     console.log(doc.id, '=>', doc.data());
+    //     console.log(doc)
+    //     setArr((old)=>[...old,{'name':doc.data()['Specific Motion'],'id':doc.id}])
+    // });
+    // navigate('/')
+    
 }
 
 
@@ -57,7 +62,7 @@ const fillcaldb = async (id)=>{
         <>
             <div className="div1">
                 <div className="div2">
-                    <h1 className='head1'>Aww Snap Follow Gump!</h1>
+                    <h1 className='head1'>Aww Follow Gump!</h1>
                     <div className="div3">
                         <div className="div4">
                         <p style={{fontSize: "1.25em", lineHeight: "1.4", marginTop: "-5px"}}>
@@ -81,9 +86,9 @@ const fillcaldb = async (id)=>{
                     </div>
                     <h1 style={{fontSize:'30px'}}>The calories you still need to burn is <span style={{lineHeight:'50px',fontWeight:'bold'}}>{props.cal}</span> calories!</h1>
                     <Box sx={{ width:'50%',marginLeft:'350px', marginTop:'70px' }}>
-                        <FailureCards arr={arr}/>
+                        {arr?<FailureCards arr={arr}/>:<></>}
                     </Box>
-                    <Button variant="contained" onClick={()=>fillcaldb(props.id)} style={{width:'150px',height:'60px',fontFamily:'inherit',fontWeight:'bold',fontSize:'20px',backgroundColor:'darkblue',color:'white',marginTop:'15px'}}>Back to Home</Button>  
+                    <Button variant="contained" type="button" onClick={()=>fillcaldb(props.id)} style={{width:'150px',height:'60px',fontFamily:'inherit',fontWeight:'bold',fontSize:'20px',backgroundColor:'darkblue',color:'white',marginTop:'15px'}}>Back to Home</Button>  
                         
                     <div className="div7">
                       
