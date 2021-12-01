@@ -4,24 +4,20 @@ import { UserContext } from '../../contexts/UserProvider';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import back from "../../assets/img/job3.png"
-import MenuItem from '@mui/material/MenuItem';
+import JobCard from './JobCard'
 import Button from '@mui/material/Button';
 import { NavigationMenu, Header } from '../basic/Header'
 import axios from 'axios'
 import Box from '@mui/material/Box';
-import { firestore } from '../../services/firebase';
-import { getStorage, ref } from "firebase/storage";
 import { useNavigate } from "react-router-dom"
 
 
 const JobMain = () => {
-    // const[title,setTitle] = useState('');
+    const [skill,setSkill] = useState([])
+    const [arr,setArr] = useState([])
     const[image,setImage] = useState(null);
-    // const[content,setContent] = useState('');
-    // const[cal,setCal] = useState(0)
     const titleRef = useRef()
     const contentRef = useRef()
-    // const currencyRef = useRef()
     const navigate = useNavigate()
     const user = useContext(UserContext)
 
@@ -73,6 +69,8 @@ async function handleSubmit(event){
     })
         .then(res => {
           console.log(res.data);
+          setSkill(res.data['skills'])
+          setArr(res.data['jobs'])
         })
         .catch(err => console.log(err))
   };
@@ -126,12 +124,19 @@ async function handleSubmit(event){
                         </div>
                         
                     </div>
-                        {/* <h1 style={{fontSize:'30px'}}>Your calorie intake is <span style={{lineHeight:'50px',fontWeight:'bold'}}>{cal}</span> calories!</h1>
+                        {skill?
+                        <>
+                            <h1 style={{fontSize:'30px'}}>The skills you possess are :</h1>
+                            {skill.map(item => <li>{item}</li>) }
+                            </>:<></>
+                        } 
+                        <br/>
+                        <h1 style={{fontSize:'30px'}}>Jobs Personalized just for you :)</h1>
                         <Box sx={{ width:'50%',marginLeft:'350px', marginTop:'70px' }}>
                           
-                            <EatenCard arr={arr}/>
+                            <JobCard arr={arr}/>
                           
-                        </Box> */}
+                        </Box>
                         
                         
                         
