@@ -37,7 +37,7 @@ const Result = () => {
     
     const[navOpen,setNavOpen] = useState(false)
     const[navIsAnimating,setNavIsAnimating] = useState(false)
-    const loggedInUser = {'GET JOBS':'/','MY PRODUCTIVITY':'/','MY PROFILE':'/myprofile','HOW WE WORK?':'/','HOME':'/'}
+    const loggedInUser = {'GET JOBS':'/jobs','MY PRODUCTIVITY':'/','MY PROFILE':'/myprofile','HOW WE WORK?':'/','HOME':'/'}
     
     const toggleNav = (event) => {
         event.preventDefault();
