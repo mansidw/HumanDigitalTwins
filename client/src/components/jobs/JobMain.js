@@ -61,20 +61,20 @@ async function handleSubmit(event){
     event.preventDefault();
     console.log(titleRef.current.value,contentRef.current.value,image);
     let form_data = new FormData();
-    form_data.append('image', image, image.name);
+    form_data.append('resume', image, image.name);
     form_data.append('title', titleRef.current.value);
     form_data.append('content', contentRef.current.value);
     console.log(form_data)
-    // let url = 'http://localhost:8000/api/posts/';
-    // axios.post(url, form_data, {
-    //   headers: {
-    //     'content-type': 'multipart/form-data'
-    //   }
-    // })
-    //     .then(res => {
-    //       console.log(res.data);
-    //     })
-    //     .catch(err => console.log(err))
+    let url = 'http://localhost:8000/workstyle/getJobs/';
+    axios.post(url, form_data, {
+      headers: {
+        'content-type': 'multipart/form-data'
+      }
+    })
+        .then(res => {
+          console.log(res.data);
+        })
+        .catch(err => console.log(err))
   };
 
   const handleImageChange = (e) => {
