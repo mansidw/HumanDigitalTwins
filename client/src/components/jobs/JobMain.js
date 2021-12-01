@@ -4,24 +4,20 @@ import { UserContext } from '../../contexts/UserProvider';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import back from "../../assets/img/job3.png"
-import MenuItem from '@mui/material/MenuItem';
+import JobCard from './JobCard'
 import Button from '@mui/material/Button';
 import { NavigationMenu, Header } from '../basic/Header'
 import axios from 'axios'
 import Box from '@mui/material/Box';
-import { firestore } from '../../services/firebase';
-import { getStorage, ref } from "firebase/storage";
 import { useNavigate } from "react-router-dom"
 
 
 const JobMain = () => {
-    // const[title,setTitle] = useState('');
+    const [skill,setSkill] = useState()
+    const [arr,setArr] = useState([])
     const[image,setImage] = useState(null);
-    // const[content,setContent] = useState('');
-    // const[cal,setCal] = useState(0)
     const titleRef = useRef()
     const contentRef = useRef()
-    // const currencyRef = useRef()
     const navigate = useNavigate()
     const user = useContext(UserContext)
 
@@ -61,20 +57,22 @@ async function handleSubmit(event){
     event.preventDefault();
     console.log(titleRef.current.value,contentRef.current.value,image);
     let form_data = new FormData();
-    form_data.append('image', image, image.name);
+    form_data.append('resume', image, image.name);
     form_data.append('title', titleRef.current.value);
     form_data.append('content', contentRef.current.value);
     console.log(form_data)
-    // let url = 'http://localhost:8000/api/posts/';
-    // axios.post(url, form_data, {
-    //   headers: {
-    //     'content-type': 'multipart/form-data'
-    //   }
-    // })
-    //     .then(res => {
-    //       console.log(res.data);
-    //     })
-    //     .catch(err => console.log(err))
+    let url = '';
+    axios.post(url, form_data, {
+      headers: {
+        'content-type': 'multipart/form-data'
+      }
+    })
+        .then(res => {
+          console.log(res.data);
+          setSkill(res.data['skill'])
+          setArr(res.data['jobs'])
+        })
+        .catch(err => console.log(err))
   };
 
   const handleImageChange = (e) => {
@@ -126,12 +124,20 @@ async function handleSubmit(event){
                         </div>
                         
                     </div>
-                        {/* <h1 style={{fontSize:'30px'}}>Your calorie intake is <span style={{lineHeight:'50px',fontWeight:'bold'}}>{cal}</span> calories!</h1>
+                        {skill?
+                        <>
+                            <h1 style={{fontSize:'30px'}}>The skills you possess are :</h1>
+                            {skill.map((item,index)=>{
+                                <span style={{lineHeight:'50px',fontWeight:'bold'}} key={index}>{item}</span>
+                            })}
+                            </>:<></>
+                        } 
+                        <h1 style={{fontSize:'30px'}}>Jobs Personalized just for you :)</h1>
                         <Box sx={{ width:'50%',marginLeft:'350px', marginTop:'70px' }}>
                           
-                            <EatenCard arr={arr}/>
+                            <JobCard arr={arr}/>
                           
-                        </Box> */}
+                        </Box>
                         
                         
                         
