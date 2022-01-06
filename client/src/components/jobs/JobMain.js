@@ -67,12 +67,12 @@ async function handleSubmit(event){
         'content-type': 'multipart/form-data'
       }
     })
-        .then(res => {
-          console.log(res.data);
-          setSkill(res.data['skills'])
-          setArr(res.data['jobs'])
-        })
-        .catch(err => console.log(err))
+    .then(res => {
+        console.log(res.data);
+        setSkill(res.data['skills'])
+        setArr(res.data['jobs'])
+    })
+    .catch(err => console.log(err))
   };
 
   const handleImageChange = (e) => {
